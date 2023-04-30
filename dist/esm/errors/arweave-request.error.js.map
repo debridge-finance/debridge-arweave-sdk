@@ -1,0 +1,1 @@
+{"version":3,"file":"arweave-request.error.js","sourceRoot":"","sources":["../../../src/errors/arweave-request.error.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,kBAAkB,EAAC,MAAM,wBAAwB,CAAC;AAE1D,MAAM,OAAO,mBAAoB,SAAQ,kBAAkB;IACzD,YAAY,OAAe;QACzB,KAAK,CAAC,OAAO,EAAE,mBAAmB,CAAC,IAAI,CAAC,CAAC;IAC3C,CAAC;CACF"}
