@@ -1,0 +1,27 @@
+{
+  "name": "debridge-arweave-sdk",
+  "version": "1.0.0",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "browser": "./dist/esm/index.js",
+  "scripts": {
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:node": "tsc -p tsconfig.cjs.json",
+    "build:browser": "rollup -c",
+    "build": "rimraf dist && npm run build:esm && npm run build:node"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "24.1.0",
+    "@rollup/plugin-json": "4.1.0",
+    "@rollup/plugin-node-resolve": "15.0.2",
+    "@rollup/plugin-replace": "5.0.2",
+    "@rollup/plugin-typescript": "11.1.0",
+    "@types/node": "18.16.3",
+    "rimraf": "4.4.1",
+    "tslib": "2.5.0",
+    "typescript": "5.0.4"
+  },
+  "dependencies": {
+    "web3": "1.9.0"
+  }
+}

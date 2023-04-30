@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+      "lib": ["es2022", "dom"],
+      "moduleResolution": "node",
+      "module": "es2022",
+      "target": "es2022",
+      "outDir": "dist/esm/",
+      "declaration": false,
+      "declarationMap": false,
+    },
+    "include": ["src"],
+    "exclude": ["dependencies"]
+}  

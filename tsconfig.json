@@ -1,0 +1,19 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "lib": ["es2022", "dom"],
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "types": ["mocha", "chai", "node"]
+    },
+    "include": ["src", "tests"],
+    "typedocOptions": {
+        "entryPoints": ["./src/index.ts"],
+        "entryPointStrategy": "expand",
+        "plugin": "typedoc-plugin-markdown",
+        "excludeExternals": true,
+        "externalPattern": ["**/node_modules/**"],
+        "excludePrivate": true,
+        "out": "docs"
+    }
+}
