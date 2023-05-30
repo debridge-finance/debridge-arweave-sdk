@@ -2,6 +2,7 @@
   "name": "debridge-arweave-sdk",
   "version": "1.0.0",
   "main": "./dist/cjs/index.js",
+  "typings": "dist/types/index",
   "module": "./dist/esm/index.js",
   "browser": "./dist/esm/index.js",
   "scripts": {
