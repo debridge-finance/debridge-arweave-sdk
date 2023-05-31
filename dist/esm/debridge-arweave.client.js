@@ -32,7 +32,14 @@ export class DebridgeArweaveClient {
         const result = signaturesData
             .filter((item) => !!item.signature)
             .map((signatureData) => {
-            const validator = this.web3.eth.accounts.recover(submissionId, signatureData.signature);
+            let validator = '';
+            try {
+                validator = this.web3.eth.accounts.recover(submissionId, signatureData.signature);
+            }
+            catch (e) {
+                const error = e;
+                context.logger.error(`[getSubmissionConfirmations] Error for erecover submissionId ${submissionId}, signature: ${signatureData.signature} error :${error.message}`);
+            }
             return {
                 ...signatureData,
                 validator,
@@ -97,7 +104,14 @@ export class DebridgeArweaveClient {
         const result = signaturesData
             .filter((item) => !!item.signature)
             .map((signatureData) => {
-            const validator = this.web3.eth.accounts.recover(signatureData.deployId, signatureData.signature);
+            let validator = '';
+            try {
+                validator = this.web3.eth.accounts.recover(signatureData.deployId, signatureData.signature);
+            }
+            catch (e) {
+                const error = e;
+                context.logger.error(`[getNewAssetConfirmations] Error for erecover deployId ${deployId}, signature: ${signatureData.signature}: error: ${error.message}`);
+            }
             return {
                 ...signatureData,
                 validator,
