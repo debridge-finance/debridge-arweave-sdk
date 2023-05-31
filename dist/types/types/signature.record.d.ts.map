@@ -1,1 +1,1 @@
-{"version":3,"file":"signature.record.d.ts","sourceRoot":"","sources":["../../../src/types/signature.record.ts"],"names":[],"mappings":"AAAA,qBAAa,eAAe;IAC1B,SAAS,EAAE,MAAM,CAAC;CACnB"}
+{"version":3,"file":"signature.record.d.ts","sourceRoot":"","sources":["../../../src/types/signature.record.ts"],"names":[],"mappings":"AAAA,qBAAa,eAAe;IAC1B,SAAS,EAAE,MAAM,CAAC;IAClB,SAAS,EAAE,MAAM,CAAC;CACnB"}
