@@ -54,6 +54,7 @@ class ArweaveConnector {
     generateQueryWithTags(tags) {
         const query = `{  
         transactions(
+          first: 1000,
           tags: ${JSON.stringify(tags)},
           owners: ${JSON.stringify(this.txOwners)}
         ) {    

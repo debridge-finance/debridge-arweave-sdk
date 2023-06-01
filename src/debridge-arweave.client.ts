@@ -7,6 +7,12 @@ import { AssetConfirmationArweaveRecord } from "./types/asset.confirmation.arwea
 import { ArweaweTag } from "./types/arweawe.tag";
 import { FindNewAssetRequest } from "./types/find.new.asset.request";
 
+type ValidatorConfig = {
+  arweave: string;
+  validator: string;
+  name: string;
+};
+
 /**
  * DebridgeArweaveClient is a class for receiving debridge transactions from arweave.
  * For creating instance of ArweaveConnector you should to put arweaveNode and txOwners.
@@ -16,9 +22,13 @@ export class DebridgeArweaveClient {
 
   private readonly arweaweConnector: ArweaveConnector;
   private readonly web3: Web3 = new Web3();
+  private readonly validatorNames = new Map<string, string>();
 
-  constructor(arweaveNode: string, txOwners: string[]) {
-    this.arweaweConnector = new ArweaveConnector(arweaveNode, txOwners);
+  constructor(arweaveNode: string, validators: ValidatorConfig[]) {
+    this.arweaweConnector = new ArweaveConnector(arweaveNode, validators.map(validator => validator.arweave));
+    validators.forEach(validator => {
+      this.validatorNames.set(validator.validator, validator.name);
+    });
   }
 
   /**
@@ -60,6 +70,7 @@ export class DebridgeArweaveClient {
         return {
           ...signatureData,
           validator,
+          validatorName: this.validatorNames.get(validator)!
         };
       });
 
@@ -149,6 +160,7 @@ export class DebridgeArweaveClient {
         return {
           ...signatureData,
           validator,
+          validatorName: this.validatorNames.get(validator)!
         };
       });
 

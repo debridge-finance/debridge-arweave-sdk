@@ -12,8 +12,12 @@ const web3_1 = tslib_1.__importDefault(require("web3"));
 class DebridgeArweaveClient {
     arweaweConnector;
     web3 = new web3_1.default();
-    constructor(arweaveNode, txOwners) {
-        this.arweaweConnector = new arweave_connector_1.ArweaveConnector(arweaveNode, txOwners);
+    validatorNames = new Map();
+    constructor(arweaveNode, validators) {
+        this.arweaweConnector = new arweave_connector_1.ArweaveConnector(arweaveNode, validators.map(validator => validator.arweave));
+        validators.forEach(validator => {
+            this.validatorNames.set(validator.validator, validator.name);
+        });
     }
     /**
      * Get signed submission transactions from arweave by id
@@ -47,6 +51,7 @@ class DebridgeArweaveClient {
             return {
                 ...signatureData,
                 validator,
+                validatorName: this.validatorNames.get(validator)
             };
         });
         return this.filterDuplicates(result);
@@ -119,6 +124,7 @@ class DebridgeArweaveClient {
             return {
                 ...signatureData,
                 validator,
+                validatorName: this.validatorNames.get(validator)
             };
         });
         return this.filterDuplicates(result);

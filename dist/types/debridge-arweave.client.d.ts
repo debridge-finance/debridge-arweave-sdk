@@ -1,6 +1,11 @@
 import { Context } from "./types/context";
 import { SubmissionArweaveRecord } from "./types/submission.arweave-record";
 import { AssetConfirmationArweaveRecord } from "./types/asset.confirmation.arweave-record";
+type ValidatorConfig = {
+    arweave: string;
+    validator: string;
+    name: string;
+};
 /**
  * DebridgeArweaveClient is a class for receiving debridge transactions from arweave.
  * For creating instance of ArweaveConnector you should to put arweaveNode and txOwners.
@@ -9,7 +14,8 @@ import { AssetConfirmationArweaveRecord } from "./types/asset.confirmation.arwea
 export declare class DebridgeArweaveClient {
     private readonly arweaweConnector;
     private readonly web3;
-    constructor(arweaveNode: string, txOwners: string[]);
+    private readonly validatorNames;
+    constructor(arweaveNode: string, validators: ValidatorConfig[]);
     /**
      * Get signed submission transactions from arweave by id
      * @param submissionId
@@ -38,4 +44,5 @@ export declare class DebridgeArweaveClient {
     private getNewAssetConfirmations;
     private filterDuplicates;
 }
+export {};
 //# sourceMappingURL=debridge-arweave.client.d.ts.map

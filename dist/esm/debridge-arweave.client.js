@@ -8,8 +8,12 @@ import Web3 from "web3";
 export class DebridgeArweaveClient {
     arweaweConnector;
     web3 = new Web3();
-    constructor(arweaveNode, txOwners) {
-        this.arweaweConnector = new ArweaveConnector(arweaveNode, txOwners);
+    validatorNames = new Map();
+    constructor(arweaveNode, validators) {
+        this.arweaweConnector = new ArweaveConnector(arweaveNode, validators.map(validator => validator.arweave));
+        validators.forEach(validator => {
+            this.validatorNames.set(validator.validator, validator.name);
+        });
     }
     /**
      * Get signed submission transactions from arweave by id
@@ -43,6 +47,7 @@ export class DebridgeArweaveClient {
             return {
                 ...signatureData,
                 validator,
+                validatorName: this.validatorNames.get(validator)
             };
         });
         return this.filterDuplicates(result);
@@ -115,6 +120,7 @@ export class DebridgeArweaveClient {
             return {
                 ...signatureData,
                 validator,
+                validatorName: this.validatorNames.get(validator)
             };
         });
         return this.filterDuplicates(result);

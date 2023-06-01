@@ -6,8 +6,16 @@ The SDK supports searching only for transactions that were created by specific a
 
 ```typescript
 const nodeUrl = 'https://arweave.net';
-const txOwners = ['123', 'abc']; //arweave addreses
-const client = new DebridgeArweaveClient(nodeUrl, txOwners);
+const validators = [{
+  arweave: "arweaveAddress1",
+  validator: "ethWallet1",
+  name: "name1",
+}, {
+  arweave: "arweaveAddress2",
+  validator: "ethWallet2",
+  name: "name2",
+}]; //arweave addreses
+const client = new DebridgeArweaveClient(nodeUrl, validators);
 ```
 
 For using a sdk you should have a context that contains logger(see types).
