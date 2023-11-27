@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class ArweaweResponseNode {
     id;
-    owner;
+    address;
     tags;
 }
 //# sourceMappingURL=arweawe.response.js.map

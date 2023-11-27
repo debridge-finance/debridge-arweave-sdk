@@ -1,6 +1,6 @@
 class ArweaweResponseNode {
     id;
-    owner;
+    address;
     tags;
 }
 export {};

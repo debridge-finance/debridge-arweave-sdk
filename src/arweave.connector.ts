@@ -40,7 +40,7 @@ export class ArweaveConnector {
     const result = parsedResponse.transactions.edges.map(({ node }) => {
       return {
         bundlrTransactionId: node.id,
-        validator: node.owner.address,
+        validator: node.address,
         tags: node.tags.reduce((previous: Record<string, string>, current: ArweaweTag) => {
           if (current.value != null) {
             previous[current.name] = current.value;
@@ -66,7 +66,7 @@ export class ArweaveConnector {
             edges {      
               node {       
                 id   
-                owner { address } 
+                address
                 tags { 
                   name 
                   value 

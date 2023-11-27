@@ -10,9 +10,7 @@ type ArweaweResponseEdges = {
 };
 declare class ArweaweResponseNode {
     id: string;
-    owner: {
-        address: string;
-    };
+    address: string;
     tags: ArweaweTag[];
 }
 export {};
