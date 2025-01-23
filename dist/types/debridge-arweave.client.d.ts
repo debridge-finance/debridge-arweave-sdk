@@ -12,7 +12,7 @@ type ValidatorConfig = {
  * txOwners is variables for setuping a list of tx owners. Its important for avoiding spam messages.
  */
 export declare class DebridgeArweaveClient {
-    private readonly arweaweConnector;
+    private readonly arweaveConnector;
     private readonly web3;
     private readonly validatorNames;
     constructor(arweaveNode: string, validators: ValidatorConfig[]);

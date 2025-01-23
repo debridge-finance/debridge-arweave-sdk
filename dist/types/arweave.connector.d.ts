@@ -1,4 +1,4 @@
-import { ArweaweTag } from "./types/arweawe.tag";
+import { ArweaveTag } from "./types/arweave.tag";
 import { Context } from "./types/context";
 import { ArweaveConnectorResponse } from "./types/arweave.connector-response";
 /**
@@ -15,7 +15,7 @@ export declare class ArweaveConnector {
      * @param tags
      * @param context
      */
-    getTxsByTags(tags: ArweaweTag[], context: Context): Promise<ArweaveConnectorResponse>;
+    getTxsByTags(tags: ArweaveTag[], context: Context): Promise<ArweaveConnectorResponse>;
     private generateQueryWithTags;
 }
 //# sourceMappingURL=arweave.connector.d.ts.map

@@ -6,11 +6,11 @@ import Web3 from "web3";
  * txOwners is variables for setuping a list of tx owners. Its important for avoiding spam messages.
  */
 export class DebridgeArweaveClient {
-    arweaweConnector;
+    arweaveConnector;
     web3 = new Web3();
     validatorNames = new Map();
     constructor(arweaveNode, validators) {
-        this.arweaweConnector = new ArweaveConnector(arweaveNode, validators.map(validator => validator.arweave));
+        this.arweaveConnector = new ArweaveConnector(arweaveNode, validators.map(validator => validator.arweave));
         validators.forEach(validator => {
             this.validatorNames.set(validator.validator, validator.name);
         });
@@ -21,16 +21,16 @@ export class DebridgeArweaveClient {
      * @param context
      */
     async getSubmissionConfirmations(submissionId, context) {
-        const bundlrTxs = await this.arweaweConnector.getTxsByTags([{ name: 'submissionId', value: submissionId }], context);
-        const signaturesData = bundlrTxs.map((bundlrTx) => {
+        const arweaveTxs = await this.arweaveConnector.getTxsByTags([{ name: 'submissionId', value: submissionId }], context);
+        const signaturesData = arweaveTxs.map((tx) => {
             return {
-                signature: bundlrTx.tags?.signature,
-                submissionId: bundlrTx.tags.submissionId,
-                txHash: bundlrTx.tags.txHash,
-                chainIdFrom: bundlrTx.tags.chainIdFrom,
-                nonce: bundlrTx.tags.nonce,
-                chainIdTo: bundlrTx.tags.chainIdTo,
-                bundlrTransactionId: bundlrTx.bundlrTransactionId,
+                signature: tx.tags?.signature,
+                submissionId: tx.tags.submissionId,
+                txHash: tx.tags.txHash,
+                chainIdFrom: tx.tags.chainIdFrom,
+                nonce: tx.tags.nonce,
+                chainIdTo: tx.tags.chainIdTo,
+                arweaveTransactionId: tx.arweaveTransactionId,
             };
         });
         const result = signaturesData
@@ -81,29 +81,29 @@ export class DebridgeArweaveClient {
         }, context);
     }
     async getNewAssetConfirmations({ deployId, tokenAddress, nativeChainId, debridgeId, }, context) {
-        const bundlrRequest = [];
+        const arweaveRequest = [];
         if (deployId) {
-            bundlrRequest.push({ name: 'deployId', value: deployId });
+            arweaveRequest.push({ name: 'deployId', value: deployId });
         }
         if (debridgeId) {
-            bundlrRequest.push({ name: 'debridgeId', value: debridgeId });
+            arweaveRequest.push({ name: 'debridgeId', value: debridgeId });
         }
         if (tokenAddress) {
-            bundlrRequest.push({ name: 'tokenAddress', value: tokenAddress });
-            bundlrRequest.push({ name: 'nativeChainId', value: nativeChainId });
+            arweaveRequest.push({ name: 'tokenAddress', value: tokenAddress });
+            arweaveRequest.push({ name: 'nativeChainId', value: nativeChainId });
         }
-        const bundlrTxs = await this.arweaweConnector.getTxsByTags(bundlrRequest, context);
-        const signaturesData = bundlrTxs.map((bundlrTx) => {
+        const arweaveTxs = await this.arweaveConnector.getTxsByTags(arweaveRequest, context);
+        const signaturesData = arweaveTxs.map((tx) => {
             return {
-                signature: bundlrTx.tags?.signature,
-                deployId: bundlrTx.tags.deployId,
-                debridgeId: bundlrTx.tags.debridgeId,
-                nativeChainId: bundlrTx.tags.nativeChainId,
-                tokenDecimals: bundlrTx.tags.tokenDecimals,
-                tokenName: bundlrTx.tags.tokenName,
-                tokenSymbol: bundlrTx.tags.tokenSymbol,
-                tokenAddress: bundlrTx.tags.tokenAddress,
-                bundlrTransactionId: bundlrTx.bundlrTransactionId,
+                signature: tx.tags?.signature,
+                deployId: tx.tags.deployId,
+                debridgeId: tx.tags.debridgeId,
+                nativeChainId: tx.tags.nativeChainId,
+                tokenDecimals: tx.tags.tokenDecimals,
+                tokenName: tx.tags.tokenName,
+                tokenSymbol: tx.tags.tokenSymbol,
+                tokenAddress: tx.tags.tokenAddress,
+                arweaveTransactionId: tx.arweaveTransactionId,
             };
         });
         const result = signaturesData

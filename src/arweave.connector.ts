@@ -1,7 +1,7 @@
-import { ArweaweTag } from "./types/arweawe.tag";
+import { ArweaveTag } from "./types/arweave.tag";
 import { Context } from "./types/context";
 import { ArweaveRequestError } from "./errors/arweave-request.error";
-import { ArweaweResponse } from "./types/arweawe.response";
+import { ArweaveResponse } from "./types/arweave.response";
 import { ArweaveConnectorResponse } from "./types/arweave.connector-response";
 
 /**
@@ -19,7 +19,7 @@ export class ArweaveConnector {
    * @param tags
    * @param context
    */
-  async getTxsByTags(tags:  ArweaweTag[], context: Context): Promise<ArweaveConnectorResponse> {
+  async getTxsByTags(tags:  ArweaveTag[], context: Context): Promise<ArweaveConnectorResponse> {
     context.logger.log(`getTxsByTags is started`);
     const body = this.generateQueryWithTags(
       tags.filter((tag) => !!tag.value),
@@ -36,12 +36,12 @@ export class ArweaveConnector {
       throw new ArweaveRequestError(`Can not download result from arweave`);
     }
     const text = await response.text();
-    const parsedResponse = JSON.parse(text).data as ArweaweResponse;
+    const parsedResponse = JSON.parse(text).data as ArweaveResponse;
     const result = parsedResponse.transactions.edges.map(({ node }) => {
       return {
-        bundlrTransactionId: node.id,
-        validator: node.address,
-        tags: node.tags.reduce((previous: Record<string, string>, current: ArweaweTag) => {
+        arweaveTransactionId: node.id,
+        validator: node.owner.address,
+        tags: node.tags.reduce((previous: Record<string, string>, current: ArweaveTag) => {
           if (current.value != null) {
             previous[current.name] = current.value;
           }
@@ -55,7 +55,7 @@ export class ArweaveConnector {
   }
 
   private generateQueryWithTags(
-    tags: ArweaweTag[],
+    tags: ArweaveTag[],
   ): string {
     const query = `{  
         transactions(
@@ -66,7 +66,9 @@ export class ArweaveConnector {
             edges {      
               node {       
                 id   
-                address
+                owner {
+                  address
+                }
                 tags { 
                   name 
                   value 
