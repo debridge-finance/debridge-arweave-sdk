@@ -1,5 +1,5 @@
 type ArweaveConnectorItem = {
-  bundlrTransactionId: string;
+  arweaveTransactionId: string;
   validator: string;
   tags: Record<string, string>;
 }

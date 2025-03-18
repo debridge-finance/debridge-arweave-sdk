@@ -1,4 +1,4 @@
-export type ArweaweTag = {
+export type ArweaveTag = {
   name: string;
   value?: string;
 };

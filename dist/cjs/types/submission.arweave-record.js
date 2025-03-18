@@ -8,7 +8,7 @@ class SubmissionArweaveRecord extends signature_record_1.SignatureRecord {
     chainIdFrom;
     nonce;
     chainIdTo;
-    bundlrTransactionId;
+    arweaveTransactionId;
 }
 exports.SubmissionArweaveRecord = SubmissionArweaveRecord;
 //# sourceMappingURL=submission.arweave-record.js.map

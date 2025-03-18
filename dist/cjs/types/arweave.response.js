@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class ArweaweResponseNode {
+class ArweaveResponseNode {
     id;
-    address;
+    owner;
     tags;
 }
-//# sourceMappingURL=arweawe.response.js.map
+//# sourceMappingURL=arweave.response.js.map
